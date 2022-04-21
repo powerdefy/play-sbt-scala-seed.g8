@@ -3,9 +3,10 @@ organization := "$organization$"
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+// disable default Play layout to enable SBT layout
+lazy val root = (project in file(".")).enablePlugins(PlayScala).disablePlugins(PlayLayoutPlugin)
 
-scalaVersion := "2.12.4"
+scalaVersion := "2.13.8"
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "$scalatestplusplay_version$" % Test
@@ -16,6 +17,3 @@ libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "$scal
 // Adds additional packages into resources/routes
 // play.sbt.routes.RoutesKeys.routesImport += "$package$.$name;format="word"$.binders._"
 
-// disable default Play layout to enable SBT layout
-disablePlugins(PlayLayoutPlugin)
-PlayKeys.playMonitoredFiles ++= (sourceDirectories in (Compile, TwirlKeys.compileTemplates)).value
